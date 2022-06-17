@@ -1,9 +1,10 @@
 import { Box, Button, Center, Text } from "@mantine/core";
+import CurrentLocation from "./components/CurrentLocation";
 
 const Home = () => {
   return (
-    <Center>
-      <Text>hellos</Text>
+    <Center mt={'xl'}>
+      <CurrentLocation />
     </Center>
   );
 };
