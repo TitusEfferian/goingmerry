@@ -1,4 +1,4 @@
-import { ActionIcon, Card, Center } from "@mantine/core";
+import { ActionIcon, Card, Center, Tooltip } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 import { CirclePlus } from "tabler-icons-react";
 
@@ -15,9 +15,18 @@ const CustomClockCard = () => {
       }}
     >
       <Center sx={{ height: "100%" }}>
-        <ActionIcon size={"xl"} variant="transparent">
-          <CirclePlus />
-        </ActionIcon>
+        <Tooltip
+          opened
+          transition={"slide-up"}
+          transitionDuration={1000}
+          withArrow
+          label="add up to 4 of your additional timezone here"
+          position="bottom"
+        >
+          <ActionIcon size={"xl"} variant="transparent">
+            <CirclePlus />
+          </ActionIcon>
+        </Tooltip>
       </Center>
     </Card>
   );

@@ -5,9 +5,6 @@ const CustomClockList = () => {
   return (
     <Group>
       <CustomClockCard />
-      <CustomClockCard />
-      <CustomClockCard />
-      <CustomClockCard />
     </Group>
   );
 };
