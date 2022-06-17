@@ -1,4 +1,5 @@
-import { Select, Text } from "@mantine/core";
+import { Button, Group, Select, Stack, Text } from "@mantine/core";
+import { useModals } from "@mantine/modals";
 
 const data_set = [
   {
@@ -16,14 +17,28 @@ const data_set = [
 ];
 
 const AvailableTimezone = () => {
+  const modals = useModals();
   return (
-    <Select
-      onChange={(e) => {
-        console.log(e);
-      }}
-      searchable
-      data={data_set}
-    />
+    <Stack>
+      <Select
+        onChange={(e) => {
+          console.log(e);
+        }}
+        searchable
+        data={data_set}
+      />
+      <Group position="right">
+        <Button
+          color="red"
+          onClick={() => {
+            modals.closeAll();
+          }}
+        >
+          Cancel
+        </Button>
+        <Button>Apply</Button>
+      </Group>
+    </Stack>
   );
 };
 

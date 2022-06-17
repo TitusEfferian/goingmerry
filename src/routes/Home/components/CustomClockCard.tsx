@@ -16,7 +16,7 @@ const CustomClockCard = () => {
   const modals = useModals();
   const handleOpenModal = () => {
     modals.openModal({
-      title: "hello",
+      title: "Choose additional timezone",
       children: (
         <Suspense fallback={<Loader size={"sm"} />}>
           <AvailableTimezone />
