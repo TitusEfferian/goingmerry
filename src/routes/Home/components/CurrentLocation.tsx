@@ -1,13 +1,19 @@
-import { Stack, Text, Title } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { Loader, Stack, Text, Title } from "@mantine/core";
+import { memo, useEffect, useState } from "react";
+import { useHomeState } from "../contexts";
 
 const CurrentLocation = () => {
+  const { currentLocationTime } = useHomeState();
   return (
     <Stack spacing={"lg"} align="center">
       <Title order={3}>Bali</Title>
-      <Title order={1}>21:00</Title>
+      {currentLocationTime ? (
+        <Title order={1}>{currentLocationTime}</Title>
+      ) : (
+        <Loader />
+      )}
     </Stack>
   );
 };
 
-export default CurrentLocation;
+export default memo(CurrentLocation);

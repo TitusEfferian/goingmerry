@@ -1,6 +1,9 @@
 import { ACTIONTYPE, INITIAL_STATE } from "../types";
 
-const initialState: INITIAL_STATE = { openClockModal: false };
+const initialState: INITIAL_STATE = {
+  openClockModal: false,
+  currentLocationTime: "",
+};
 
 const reducer = (
   state: typeof initialState,
@@ -12,6 +15,12 @@ const reducer = (
         ...state,
         openClockModal: true,
       };
+    case "SET_CURRENT_LOCATION_TIME": {
+      return {
+        ...state,
+        currentLocationTime: action.data,
+      };
+    }
     default:
       throw new Error();
   }
