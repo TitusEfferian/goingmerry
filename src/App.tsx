@@ -1,9 +1,19 @@
-import { Button } from '@mantine/core';
-import React from 'react';
+import { AppShell, MantineProvider } from "@mantine/core";
+import { lazy, useEffect, useState } from "react";
+
+const Home = lazy(() => import(/* webpackChunkName: "Home" */ "./routes/Home"));
 
 function App() {
   return (
-   <Button>hello world</Button>
+    <MantineProvider
+      withGlobalStyles
+      withNormalizeCSS
+      theme={{ colorScheme: "dark" }}
+    >
+      <AppShell>
+        <Home />
+      </AppShell>
+    </MantineProvider>
   );
 }
 
