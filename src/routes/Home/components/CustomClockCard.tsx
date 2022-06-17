@@ -1,10 +1,15 @@
-import { ActionIcon, Card, Center, Tooltip } from "@mantine/core";
+import { ActionIcon, Card, Center, Loader, Tooltip } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 import { useModals } from "@mantine/modals";
 import { lazy, Suspense } from "react";
 import { CirclePlus } from "tabler-icons-react";
 
-const LazyTest = lazy(() => import("./TestLazy"));
+const AvailableTimezone = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "availab-timezone-select" */ "./AvailableTimezone"
+    )
+);
 
 const CustomClockCard = () => {
   const { ref, hovered } = useHover();
@@ -13,8 +18,8 @@ const CustomClockCard = () => {
     modals.openModal({
       title: "hello",
       children: (
-        <Suspense>
-          <LazyTest />
+        <Suspense fallback={<Loader size={"sm"} />}>
+          <AvailableTimezone />
         </Suspense>
       ),
     });
@@ -23,6 +28,7 @@ const CustomClockCard = () => {
     <Card
       shadow={"md"}
       ref={ref}
+      onClick={handleOpenModal}
       sx={{
         width: 280,
         height: 400,
@@ -38,11 +44,7 @@ const CustomClockCard = () => {
           label="add up to 4 of your additional timezone here"
           position="bottom"
         >
-          <ActionIcon
-            onClick={handleOpenModal}
-            size={"xl"}
-            variant="transparent"
-          >
+          <ActionIcon size={"xl"} variant="transparent">
             <CirclePlus />
           </ActionIcon>
         </Tooltip>

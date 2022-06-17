@@ -25,13 +25,22 @@ const HomeProvider = ({ children }) => {
     const handleFuncInterval = () => {
       dispatch({
         type: "SET_CURRENT_LOCATION_TIME",
-        data: `${new Date().getHours()}:${new Date().getMinutes()}`,
+        data: `${new Date().getHours()}:${String(
+          new Date().getMinutes()
+        ).padStart(2, "0")}`,
       });
     };
     const idInterval = setInterval(handleFuncInterval, 1000);
     return () => {
       clearInterval(idInterval);
     };
+  }, []);
+  useEffect(() => {
+    fetch("https://worldtimeapi.org/api/timezone/asia/singapore")
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      });
   }, []);
   return (
     <HomeDispatch.Provider value={dispatch}>
