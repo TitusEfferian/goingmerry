@@ -1,12 +1,22 @@
-import { AppShell, MantineProvider } from "@mantine/core";
+import {
+  AppShell,
+  ColorScheme,
+  ColorSchemeProvider,
+  MantineProvider,
+} from "@mantine/core";
 import { Helmet } from "react-helmet";
-import { lazy, useEffect, useState } from "react";
+import { lazy, useState } from "react";
 import { SWRConfig } from "swr";
 import { NotificationsProvider } from "@mantine/notifications";
+
+import MantineHeader from "./routes/Home/components/Header";
 
 const Home = lazy(() => import(/* webpackChunkName: "Home" */ "./routes/Home"));
 
 function App() {
+  const [colorScheme, setColorScheme] = useState<ColorScheme>("dark");
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
   return (
     <SWRConfig
       value={{
@@ -14,20 +24,25 @@ function App() {
           fetch(resource, init).then((res) => res.json()),
       }}
     >
-      <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={{ colorScheme: "dark" }}
+      <ColorSchemeProvider
+        colorScheme={colorScheme}
+        toggleColorScheme={toggleColorScheme}
       >
-        <NotificationsProvider>
-          <AppShell>
-            <Helmet>
-              <title>Going Merry Clock</title>
-            </Helmet>
-            <Home />
-          </AppShell>
-        </NotificationsProvider>
-      </MantineProvider>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{ colorScheme }}
+        >
+          <NotificationsProvider>
+            <AppShell header={<MantineHeader />}>
+              <Helmet>
+                <title>Going Merry Clock</title>
+              </Helmet>
+              <Home />
+            </AppShell>
+          </NotificationsProvider>
+        </MantineProvider>
+      </ColorSchemeProvider>
     </SWRConfig>
   );
 }

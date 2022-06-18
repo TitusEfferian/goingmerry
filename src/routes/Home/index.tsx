@@ -1,4 +1,4 @@
-import { Box, Button, Center, Stack, Text } from "@mantine/core";
+import { Center, Stack } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
 import CurrentLocation from "./components/CurrentLocation";
 import CustomClockList from "./components/CustomClockList";
