@@ -1,5 +1,5 @@
 import { Card, Stack, Text, Title } from "@mantine/core";
-import { memo } from "react";
+import { memo, useMemo } from "react";
 import useSWR from "swr";
 import { world_timezone_api } from "../../../swr_types/timezone";
 
@@ -12,6 +12,13 @@ const CustomClockCard = ({ swrKey, city }: AppProps) => {
   const { data } = useSWR<world_timezone_api>(
     `http://worldtimeapi.org/api/timezone/${swrKey}`
   );
+  const currTime = useMemo(() => {
+    return new Date().toLocaleString("en-GB", {
+      timeZone: swrKey,
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  }, [swrKey]);
   return (
     <Card
       shadow={"md"}
@@ -30,9 +37,9 @@ const CustomClockCard = ({ swrKey, city }: AppProps) => {
         <Text size="xl" weight={"bold"}>
           {city}
         </Text>
-        <Title order={2}>19:00</Title>
+        <Title order={2}>{currTime}</Title>
         <Stack align={"center"}>
-          <Text>AEST</Text>
+          <Text>{data?.abbreviation || ""}</Text>
           <Text>3 hours ahead</Text>
         </Stack>
       </Stack>
