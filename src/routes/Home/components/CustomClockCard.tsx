@@ -1,6 +1,7 @@
 import { ActionIcon, Card, Center, Loader, Tooltip } from "@mantine/core";
 import { useHover } from "@mantine/hooks";
 import { useModals } from "@mantine/modals";
+import { get, set } from "idb-keyval";
 import { lazy, Suspense } from "react";
 import { CirclePlus } from "tabler-icons-react";
 import { useHomeDispatch, useHomeState } from "../contexts";
@@ -17,7 +18,7 @@ const CustomClockCard = () => {
   const modals = useModals();
   const { showCardTooltip } = useHomeState();
   const homeDispatch = useHomeDispatch();
-  const handleOpenModal = () => {
+  const handleOpenModal = async () => {
     homeDispatch({
       type: "CLOSE_CARD_TOOLTIP",
     });
@@ -29,6 +30,13 @@ const CustomClockCard = () => {
         </Suspense>
       ),
     });
+    const getTooltipData = await get("show-tooltip");
+    if (typeof getTooltipData === "boolean") {
+      return;
+    }
+    if (typeof getTooltipData === "undefined") {
+      await set("show-tooltip", false);
+    }
   };
   return (
     <Card

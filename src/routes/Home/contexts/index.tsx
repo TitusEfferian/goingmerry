@@ -1,3 +1,4 @@
+import { get } from "idb-keyval";
 import {
   createContext,
   Dispatch,
@@ -49,9 +50,21 @@ const HomeProvider = ({ children }: AppProps) => {
   }, []);
 
   useEffect(() => {
-    dispatch({
-      type: "SHOW_CARD_TOOLTIP",
-    });
+    const handleAsyncIDB = async () => {
+      const getTooltipData = await get("show-tooltip");
+      // already show on previous visited
+      if (typeof getTooltipData === "boolean" && !getTooltipData) {
+        return;
+      }
+      // first visit
+      if (typeof getTooltipData === "undefined") {
+        dispatch({
+          type: "SHOW_CARD_TOOLTIP",
+        });
+        return;
+      }
+    };
+    handleAsyncIDB();
   }, []);
   return (
     <HomeDispatch.Provider value={dispatch}>
