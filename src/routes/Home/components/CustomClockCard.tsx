@@ -3,7 +3,7 @@ import { memo, useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import { Adjustments, Trash } from "tabler-icons-react";
 import { world_timezone_api } from "../../../swr_types/timezone";
-import { useHomeState } from "../contexts";
+import { useHomeDispatch, useHomeState } from "../contexts";
 
 interface AppProps {
   swrKey: string;
@@ -17,6 +17,7 @@ const CustomClockCard = ({ swrKey, city, label }: AppProps) => {
   );
   const { currentLocationTime } = useHomeState();
   const [currTime, setCurrTime] = useState("");
+  const homeDispatch = useHomeDispatch();
 
   // listen to single listener to broadcast all the minutes changes.
   useEffect(() => {
@@ -43,6 +44,12 @@ const CustomClockCard = ({ swrKey, city, label }: AppProps) => {
       <ActionIcon
         size={"sm"}
         variant="transparent"
+        onClick={() => {
+          homeDispatch({
+            type: "DELETE_SELECTED_TIMEZONE",
+            data: swrKey,
+          });
+        }}
         sx={{
           position: "absolute",
           top: -10,

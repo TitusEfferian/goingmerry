@@ -45,6 +45,14 @@ const reducer = (
         ],
       };
     }
+    case "DELETE_SELECTED_TIMEZONE": {
+      return {
+        ...state,
+        listOfTimezone: state.listOfTimezone.filter(
+          (data) => data.swrKey !== action.data
+        ),
+      };
+    }
     default:
       throw new Error();
   }
