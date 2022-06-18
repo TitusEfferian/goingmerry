@@ -13,7 +13,7 @@ interface AppProps {
 
 const CustomClockCard = ({ swrKey, city, label }: AppProps) => {
   const { data } = useSWR<world_timezone_api>(
-    `http://worldtimeapi.org/api/timezone/${swrKey}`
+    `https://worldtimeapi.org/api/timezone/${swrKey}`
   );
   const { currentLocationTime } = useHomeState();
   const [currTime, setCurrTime] = useState("");
