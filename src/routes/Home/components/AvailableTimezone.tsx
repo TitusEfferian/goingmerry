@@ -79,8 +79,8 @@ const AvailableTimezone = () => {
         });
         modals.closeAll();
       },
-      onError: () => {
-        alert("something wrong");
+      onError: (err) => {
+        alert(JSON.stringify(err));
       },
     }
   );

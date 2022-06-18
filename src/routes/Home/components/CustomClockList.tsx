@@ -14,7 +14,14 @@ const CustomClockList = () => {
     return (
       <Group>
         {listOfTimezone.map((x) => {
-          return <CustomClockCard city={x.city} swrKey={x.swrKey} />;
+          return (
+            <CustomClockCard
+              label={x.label}
+              key={x.swrKey}
+              city={x.city}
+              swrKey={x.swrKey}
+            />
+          );
         })}
       </Group>
     );
@@ -22,7 +29,14 @@ const CustomClockList = () => {
   return (
     <Group>
       {listOfTimezone.map((x, y) => {
-        return <CustomClockCard city={x.city} swrKey={x.swrKey} />;
+        return (
+          <CustomClockCard
+            label={x.label}
+            key={x.swrKey}
+            city={x.city}
+            swrKey={x.swrKey}
+          />
+        );
       })}
       <CustomInputClockCard />
     </Group>
