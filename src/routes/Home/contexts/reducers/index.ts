@@ -53,6 +53,12 @@ const reducer = (
         ),
       };
     }
+    case "INIT_LIST_OF_TIMEZONE": {
+      return {
+        ...state,
+        listOfTimezone: action.data,
+      };
+    }
     default:
       throw new Error();
   }
