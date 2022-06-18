@@ -3,6 +3,7 @@ import { useHover } from "@mantine/hooks";
 import { useModals } from "@mantine/modals";
 import { lazy, Suspense } from "react";
 import { CirclePlus } from "tabler-icons-react";
+import { useHomeDispatch, useHomeState } from "../contexts";
 
 const AvailableTimezone = lazy(
   () =>
@@ -14,7 +15,12 @@ const AvailableTimezone = lazy(
 const CustomClockCard = () => {
   const { ref, hovered } = useHover();
   const modals = useModals();
+  const { showCardTooltip } = useHomeState();
+  const homeDispatch = useHomeDispatch();
   const handleOpenModal = () => {
+    homeDispatch({
+      type: "CLOSE_CARD_TOOLTIP",
+    });
     modals.openModal({
       title: "Choose additional timezone",
       children: (
@@ -37,7 +43,7 @@ const CustomClockCard = () => {
     >
       <Center sx={{ height: "100%" }}>
         <Tooltip
-          opened
+          opened={showCardTooltip}
           transition={"slide-up"}
           transitionDuration={1000}
           withArrow

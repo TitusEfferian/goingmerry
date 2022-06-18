@@ -1,17 +1,23 @@
 interface INITIAL_STATE {
-  openClockModal: boolean;
   currentLocationTime: string;
+  showCardTooltip: boolean;
 }
 
-type OPEN_CLOCK_MODAL = {
-  type: "OPEN_CLOCK_MODAL";
-  data: boolean;
+type SHOW_CARD_TOOLTIP = {
+  type: "SHOW_CARD_TOOLTIP";
+};
+
+type CLOSE_CARD_TOOLTIP = {
+  type: "CLOSE_CARD_TOOLTIP";
 };
 
 type SET_CURRENT_LOCATION_TIME = {
   type: "SET_CURRENT_LOCATION_TIME";
   data: string;
 };
-type ACTIONTYPE = OPEN_CLOCK_MODAL | SET_CURRENT_LOCATION_TIME;
+type ACTIONTYPE =
+  | SET_CURRENT_LOCATION_TIME
+  | SHOW_CARD_TOOLTIP
+  | CLOSE_CARD_TOOLTIP;
 
 export type { INITIAL_STATE, ACTIONTYPE };

@@ -1,6 +1,7 @@
 import {
   createContext,
   Dispatch,
+  ReactNode,
   useContext,
   useEffect,
   useReducer,
@@ -9,12 +10,16 @@ import { initialState, reducer } from "./reducers";
 import { ACTIONTYPE, INITIAL_STATE } from "./types";
 
 const HomeContext = createContext<INITIAL_STATE>({
-  openClockModal: false,
   currentLocationTime: "",
+  showCardTooltip: false,
 });
 const HomeDispatch = createContext<Dispatch<ACTIONTYPE>>(() => {});
 
-const HomeProvider = ({ children }) => {
+interface AppProps {
+  children: ReactNode;
+}
+
+const HomeProvider = ({ children }: AppProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   /**
@@ -41,6 +46,12 @@ const HomeProvider = ({ children }) => {
       .then((res) => {
         console.log(res);
       });
+  }, []);
+
+  useEffect(() => {
+    dispatch({
+      type: "SHOW_CARD_TOOLTIP",
+    });
   }, []);
   return (
     <HomeDispatch.Provider value={dispatch}>

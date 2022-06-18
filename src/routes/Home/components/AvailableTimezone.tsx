@@ -14,6 +14,30 @@ const data_set = [
     label: "Seoul",
     value: "asia/Seoul",
   },
+  {
+    label: "Sydney",
+    value: "Australia/Sydney",
+  },
+  {
+    label: "London",
+    value: "Europe/London",
+  },
+  {
+    label: "Paris",
+    value: "Europe/Paris",
+  },
+  {
+    label: "Berlin",
+    value: "Europe/Berlin",
+  },
+  {
+    label: "New York",
+    value: "America/New_York",
+  },
+  {
+    label: "Los Angeles",
+    value: "America/Los_Angeles",
+  },
 ];
 
 const AvailableTimezone = () => {
