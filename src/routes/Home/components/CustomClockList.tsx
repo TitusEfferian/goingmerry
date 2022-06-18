@@ -1,11 +1,15 @@
 import { Card, Group } from "@mantine/core";
+import { useHomeState } from "../contexts";
 
 import CustomClockCard from "./CustomClockCard";
 
 const CustomClockList = () => {
+  const { listOfTimezone } = useHomeState();
   return (
     <Group>
-      <CustomClockCard />
+      {listOfTimezone.map((x) => {
+        return <CustomClockCard />;
+      })}
     </Group>
   );
 };

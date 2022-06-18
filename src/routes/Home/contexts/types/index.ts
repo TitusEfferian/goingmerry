@@ -1,7 +1,7 @@
 interface INITIAL_STATE {
   currentLocationTime: string;
   showCardTooltip: boolean;
-  listOfTimezone: [];
+  listOfTimezone: number[];
   selectedTimezone: {
     timezone: string;
     label: string;

@@ -47,13 +47,25 @@ const AvailableTimezone = () => {
   const homeDispatch = useHomeDispatch();
   const [timezone, setTimezone] = useState("");
   const [shortLabel, setShortLabel] = useState("");
+  const [errorSelect, setErrorSelect] = useState({
+    isError: false,
+    message: "",
+  });
   return (
     <Stack>
       <Select
+        required
+        error={errorSelect.isError ? errorSelect.message : null}
         label="Select Timezone"
         onChange={(e) => {
-          console.log(e);
           setTimezone(e ?? "");
+          if (errorSelect.isError) {
+            setErrorSelect({
+              isError: false,
+              message: "",
+            });
+            return;
+          }
         }}
         searchable
         data={data_set}
@@ -76,6 +88,13 @@ const AvailableTimezone = () => {
         </Button>
         <Button
           onClick={() => {
+            if (!timezone) {
+              setErrorSelect({
+                isError: true,
+                message: "Please select timezone",
+              });
+              return;
+            }
             homeDispatch({
               type: "SET_SELECTED_TIMEZONE",
               data: {
