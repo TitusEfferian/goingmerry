@@ -1,20 +1,21 @@
 import { Button, Group, Select, Stack, Text, TextInput } from "@mantine/core";
 import { useModals } from "@mantine/modals";
-import { useState } from "react";
-import { useHomeDispatch } from "../contexts";
+import { memo, useState } from "react";
+import useSWR from "swr";
+import { useHomeDispatch, useHomeState } from "../contexts";
 
 const data_set = [
   {
     label: "Singapore",
-    value: "asia/singapore",
+    value: "Asia/Singapore",
   },
   {
     label: "Tokyo",
-    value: "asia/tokyo",
+    value: "Asia/Tokyo",
   },
   {
     label: "Seoul",
-    value: "asia/Seoul",
+    value: "Asia/Seoul",
   },
   {
     label: "Sydney",
@@ -51,6 +52,38 @@ const AvailableTimezone = () => {
     isError: false,
     message: "",
   });
+  const [fetchTimezone, setFetchTimezone] = useState({
+    shouldFetch: false,
+    isLoading: false,
+  });
+
+  useSWR(
+    () => {
+      if (!fetchTimezone.shouldFetch) {
+        return null;
+      }
+      return `https://worldtimeapi.org/api/timezone/${timezone}`;
+    },
+    {
+      onSuccess: () => {
+        setFetchTimezone({
+          shouldFetch: false,
+          isLoading: false,
+        });
+        homeDispatch({
+          type: "SET_SELECTED_TIMEZONE",
+          data: {
+            label: shortLabel,
+            timezone,
+          },
+        });
+        modals.closeAll();
+      },
+      onError: () => {
+        alert("something wrong");
+      },
+    }
+  );
   return (
     <Stack>
       <Select
@@ -58,7 +91,7 @@ const AvailableTimezone = () => {
         error={errorSelect.isError ? errorSelect.message : null}
         label="Select Timezone"
         onChange={(e) => {
-          setTimezone(e ?? "");
+          setTimezone(e || "");
           if (errorSelect.isError) {
             setErrorSelect({
               isError: false,
@@ -87,6 +120,7 @@ const AvailableTimezone = () => {
           Cancel
         </Button>
         <Button
+          loading={fetchTimezone.isLoading}
           onClick={() => {
             if (!timezone) {
               setErrorSelect({
@@ -95,14 +129,10 @@ const AvailableTimezone = () => {
               });
               return;
             }
-            homeDispatch({
-              type: "SET_SELECTED_TIMEZONE",
-              data: {
-                label: shortLabel,
-                timezone,
-              },
+            setFetchTimezone({
+              shouldFetch: true,
+              isLoading: true,
             });
-            modals.closeAll();
           }}
         >
           Apply
@@ -112,4 +142,4 @@ const AvailableTimezone = () => {
   );
 };
 
-export default AvailableTimezone;
+export default memo(AvailableTimezone);

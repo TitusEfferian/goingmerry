@@ -1,55 +1,26 @@
-import { ActionIcon, Card, Center, Loader, Tooltip } from "@mantine/core";
-import { useHover } from "@mantine/hooks";
-import { useModals } from "@mantine/modals";
-import { get, set } from "idb-keyval";
-import { lazy, Suspense } from "react";
-import { CirclePlus } from "tabler-icons-react";
-import { useHomeDispatch, useHomeState } from "../contexts";
+import { Card, Text } from "@mantine/core";
+import { memo } from "react";
+import useSWR from "swr";
+import { world_timezone_api } from "../../../swr_types/timezone";
 
-const AvailableTimezone = lazy(
-  () =>
-    import(
-      /* webpackChunkName: "availab-timezone-select" */ "./AvailableTimezone"
-    )
-);
+interface AppProps {
+  swrKey: string;
+}
 
-const CustomClockCard = () => {
-  const { ref, hovered } = useHover();
-  const modals = useModals();
-  const { showCardTooltip } = useHomeState();
-  const homeDispatch = useHomeDispatch();
-  const handleOpenModal = async () => {
-    homeDispatch({
-      type: "CLOSE_CARD_TOOLTIP",
-    });
-    modals.openModal({
-      title: "Choose additional timezone",
-      children: (
-        <Suspense fallback={<Loader size={"sm"} />}>
-          <AvailableTimezone />
-        </Suspense>
-      ),
-    });
-    const getTooltipData = await get("show-tooltip");
-    if (typeof getTooltipData === "boolean") {
-      return;
-    }
-    if (typeof getTooltipData === "undefined") {
-      await set("show-tooltip", false);
-    }
-  };
+const CustomClockCard = ({ swrKey }: AppProps) => {
+  const { data } = useSWR<world_timezone_api>(
+    `http://worldtimeapi.org/api/timezone/${swrKey}`
+  );
   return (
     <Card
       shadow={"md"}
-      ref={ref}
-      onClick={handleOpenModal}
       sx={{
         width: 280,
         height: 400,
-        cursor: hovered ? "pointer" : "unset",
       }}
     >
-      <Center sx={{ height: "100%" }}>
+      <Text>{data?.abbreviation || ""}</Text>
+      {/* <Center sx={{ height: "100%" }}>
         <Tooltip
           opened={showCardTooltip}
           transition={"slide-up"}
@@ -62,9 +33,9 @@ const CustomClockCard = () => {
             <CirclePlus />
           </ActionIcon>
         </Tooltip>
-      </Center>
+      </Center> */}
     </Card>
   );
 };
 
-export default CustomClockCard;
+export default memo(CustomClockCard);

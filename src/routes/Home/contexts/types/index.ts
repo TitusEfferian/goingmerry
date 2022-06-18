@@ -1,11 +1,16 @@
+interface SELECTED_TIMEZONE {
+  timezone: string;
+  label: string;
+}
+
 interface INITIAL_STATE {
   currentLocationTime: string;
   showCardTooltip: boolean;
-  listOfTimezone: number[];
-  selectedTimezone: {
-    timezone: string;
+  listOfTimezone: {
+    swrKey: string;
+    city: string;
     label: string;
-  };
+  }[];
 }
 
 type SHOW_CARD_TOOLTIP = {
@@ -23,11 +28,9 @@ type SET_CURRENT_LOCATION_TIME = {
 
 type SET_SELECTED_TIMEZONE = {
   type: "SET_SELECTED_TIMEZONE";
-  data: {
-    timezone: string;
-    label: string;
-  };
+  data: SELECTED_TIMEZONE;
 };
+
 type ACTIONTYPE =
   | SET_CURRENT_LOCATION_TIME
   | SHOW_CARD_TOOLTIP

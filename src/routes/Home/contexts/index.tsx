@@ -13,10 +13,6 @@ import { ACTIONTYPE, INITIAL_STATE } from "./types";
 const HomeContext = createContext<INITIAL_STATE>({
   currentLocationTime: "",
   showCardTooltip: false,
-  selectedTimezone: {
-    label: "",
-    timezone: "",
-  },
   listOfTimezone: [],
 });
 const HomeDispatch = createContext<Dispatch<ACTIONTYPE>>(() => {});
