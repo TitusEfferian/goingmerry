@@ -13,6 +13,11 @@ import { ACTIONTYPE, INITIAL_STATE } from "./types";
 const HomeContext = createContext<INITIAL_STATE>({
   currentLocationTime: "",
   showCardTooltip: false,
+  selectedTimezone: {
+    label: "",
+    timezone: "",
+  },
+  listOfTimezone: [],
 });
 const HomeDispatch = createContext<Dispatch<ACTIONTYPE>>(() => {});
 
@@ -22,7 +27,6 @@ interface AppProps {
 
 const HomeProvider = ({ children }: AppProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
   /**
    * init current time
    */
@@ -40,13 +44,6 @@ const HomeProvider = ({ children }: AppProps) => {
     return () => {
       clearInterval(idInterval);
     };
-  }, []);
-  useEffect(() => {
-    fetch("https://worldtimeapi.org/api/timezone/asia/singapore")
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-      });
   }, []);
 
   useEffect(() => {

@@ -1,5 +1,7 @@
-import { Button, Group, Select, Stack, Text } from "@mantine/core";
+import { Button, Group, Select, Stack, Text, TextInput } from "@mantine/core";
 import { useModals } from "@mantine/modals";
+import { useState } from "react";
+import { useHomeDispatch } from "../contexts";
 
 const data_set = [
   {
@@ -42,14 +44,26 @@ const data_set = [
 
 const AvailableTimezone = () => {
   const modals = useModals();
+  const homeDispatch = useHomeDispatch();
+  const [timezone, setTimezone] = useState("");
+  const [shortLabel, setShortLabel] = useState("");
   return (
     <Stack>
       <Select
+        label="Select Timezone"
         onChange={(e) => {
           console.log(e);
+          setTimezone(e ?? "");
         }}
         searchable
         data={data_set}
+      />
+      <TextInput
+        onChange={(e) => {
+          setShortLabel(e.target.value);
+        }}
+        placeholder="Label..."
+        label="Short Label"
       />
       <Group position="right">
         <Button
@@ -60,7 +74,20 @@ const AvailableTimezone = () => {
         >
           Cancel
         </Button>
-        <Button>Apply</Button>
+        <Button
+          onClick={() => {
+            homeDispatch({
+              type: "SET_SELECTED_TIMEZONE",
+              data: {
+                label: shortLabel,
+                timezone,
+              },
+            });
+            modals.closeAll();
+          }}
+        >
+          Apply
+        </Button>
       </Group>
     </Stack>
   );

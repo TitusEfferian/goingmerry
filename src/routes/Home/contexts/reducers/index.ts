@@ -3,6 +3,11 @@ import { ACTIONTYPE, INITIAL_STATE } from "../types";
 const initialState: INITIAL_STATE = {
   currentLocationTime: "",
   showCardTooltip: false,
+  listOfTimezone: [],
+  selectedTimezone: {
+    label: "",
+    timezone: "",
+  },
 };
 
 const reducer = (
@@ -26,6 +31,13 @@ const reducer = (
       return {
         ...state,
         showCardTooltip: false,
+      };
+    }
+    case "SET_SELECTED_TIMEZONE": {
+      console.log(action.data);
+      return {
+        ...state,
+        selectedTimezone: action.data,
       };
     }
     default:
