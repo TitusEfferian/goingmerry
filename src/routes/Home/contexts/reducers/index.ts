@@ -38,7 +38,7 @@ const reducer = (
         listOfTimezone: [
           ...state.listOfTimezone,
           {
-            city: "hello",
+            city: action.data.timezone.split("/")[1].replace(/_/g, " ") ?? "",
             label: action.data.label,
             swrKey: action.data.timezone,
           },
