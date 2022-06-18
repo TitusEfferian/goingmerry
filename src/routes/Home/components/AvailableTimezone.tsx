@@ -57,6 +57,7 @@ const AvailableTimezone = () => {
     shouldFetch: false,
     isLoading: false,
   });
+  const { listOfTimezone } = useHomeState();
 
   useSWR(
     () => {
@@ -106,7 +107,10 @@ const AvailableTimezone = () => {
           }
         }}
         searchable
-        data={data_set}
+        // validate no duplicate world clock
+        data={data_set.filter(
+          (item) => listOfTimezone.findIndex((i) => i.swrKey === item.value) < 0
+        )}
       />
       <TextInput
         onChange={(e) => {
