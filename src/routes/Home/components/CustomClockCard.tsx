@@ -1,6 +1,7 @@
-import { Card, Stack, Text, Title } from "@mantine/core";
+import { ActionIcon, Card, Stack, Text, Title } from "@mantine/core";
 import { memo, useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
+import { Adjustments, Trash } from "tabler-icons-react";
 import { world_timezone_api } from "../../../swr_types/timezone";
 import { useHomeState } from "../contexts";
 
@@ -35,8 +36,21 @@ const CustomClockCard = ({ swrKey, city, label }: AppProps) => {
       sx={{
         width: 280,
         height: 400,
+        position: "relative",
+        overflow: "unset",
       }}
     >
+      <ActionIcon
+        size={"sm"}
+        variant="transparent"
+        sx={{
+          position: "absolute",
+          top: -10,
+          right: -8,
+        }}
+      >
+        <Trash />
+      </ActionIcon>
       <Stack
         align={"center"}
         justify="space-around"

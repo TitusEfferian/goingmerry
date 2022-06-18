@@ -1,5 +1,6 @@
 import { Button, Group, Select, Stack, Text, TextInput } from "@mantine/core";
 import { useModals } from "@mantine/modals";
+import { showNotification } from "@mantine/notifications";
 import { memo, useState } from "react";
 import useSWR from "swr";
 import { useHomeDispatch, useHomeState } from "../contexts";
@@ -80,7 +81,11 @@ const AvailableTimezone = () => {
         modals.closeAll();
       },
       onError: (err) => {
-        alert(JSON.stringify(err));
+        showNotification({
+          message: "error fetch api",
+          title: "network error",
+          color: "red",
+        });
       },
     }
   );
