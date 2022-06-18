@@ -1,4 +1,4 @@
-import { Card, Group, Text } from "@mantine/core";
+import { Group } from "@mantine/core";
 import { memo } from "react";
 import { useHomeState } from "../contexts";
 import CustomClockCard from "./CustomClockCard";

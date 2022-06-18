@@ -1,5 +1,5 @@
-import { Loader, Stack, Text, Title } from "@mantine/core";
-import { memo, useEffect, useState } from "react";
+import { Loader, Stack, Title } from "@mantine/core";
+import { memo } from "react";
 import { useHomeState } from "../contexts";
 
 const CurrentLocation = () => {

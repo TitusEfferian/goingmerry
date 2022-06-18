@@ -1,7 +1,7 @@
 import { ActionIcon, Card, Stack, Text, Title } from "@mantine/core";
-import { memo, useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import useSWR from "swr";
-import { Adjustments, Trash } from "tabler-icons-react";
+import { Trash } from "tabler-icons-react";
 import { world_timezone_api } from "../../../swr_types/timezone";
 import { useHomeDispatch, useHomeState } from "../contexts";
 
