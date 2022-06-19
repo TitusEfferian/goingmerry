@@ -20,6 +20,7 @@ const MantinHeader = () => {
       >
         <Text data-testid="header-title">Going Merry Clock</Text>
         <ActionIcon
+          data-testid="header-action-icon"
           onClick={() => {
             toggleColorScheme();
           }}
