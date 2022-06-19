@@ -24,7 +24,6 @@ interface AppProps {
 
 const HomeProvider = ({ children }: AppProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log("lewat");
 
   const handleInitialize = useCallback(async () => {
     const getListOfTimezoneIDB = await get("listOfTimezone");

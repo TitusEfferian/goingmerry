@@ -1,9 +1,5 @@
 import { ModalsProvider } from "@mantine/modals";
-import {
-  fireEvent,
-  render,
-  screen,
-} from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import { SWRConfig } from "swr";
 import AvailableTimezone from "../AvailableTimezone";
@@ -67,7 +63,7 @@ describe("Available Timezone Test", () => {
     // still can't mock select from  mantine
     // fireEvent.focus(screen.getByTestId('available-timezone-select'));
     // fireEvent.click(screen.getByText('Singapore'));
-    fireEvent.click(screen.getByTestId('available-timezone-apply'));
+    fireEvent.click(screen.getByTestId("available-timezone-apply"));
   });
 
   it("should cancel available timezone correctly", async () => {
@@ -86,7 +82,7 @@ describe("Available Timezone Test", () => {
       </SWRConfig>
     );
     expect(screen.getByTestId("available-timezone-apply")).toBeDefined();
-    fireEvent.click(screen.getByTestId('available-timezone-cancel'));
+    fireEvent.click(screen.getByTestId("available-timezone-cancel"));
   });
 
   it("should check text input only for 20 length character correctly", async () => {

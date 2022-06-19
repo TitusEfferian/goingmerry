@@ -5,10 +5,16 @@ import { useHomeState } from "../contexts";
 const CurrentLocation = () => {
   const { currentLocationTime } = useHomeState();
   return (
-    <Stack spacing={"lg"} align="center">
+    <Stack
+      data-testid="current-location-container"
+      spacing={"lg"}
+      align="center"
+    >
       <Title order={3}>Bali</Title>
       {currentLocationTime ? (
-        <Title order={1}>{currentLocationTime}</Title>
+        <Title data-testid="current-location-timer" order={1}>
+          {currentLocationTime}
+        </Title>
       ) : (
         <Loader />
       )}
