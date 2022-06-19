@@ -92,8 +92,9 @@ const AvailableTimezone = () => {
     }
   );
   return (
-    <Stack>
+    <Stack data-testid="available-timezone-container">
       <Select
+        data-testid="available-timezone-select"
         required
         error={errorSelect.isError ? errorSelect.message : null}
         label="Select Timezone"
@@ -114,6 +115,7 @@ const AvailableTimezone = () => {
         )}
       />
       <TextInput
+        data-testid="available-timezone-textinput"
         onChange={(e) => {
           setShortLabel(e.target.value);
         }}
@@ -127,6 +129,7 @@ const AvailableTimezone = () => {
       />
       <Group position="right">
         <Button
+          data-testid="available-timezone-cancel"
           color="red"
           onClick={() => {
             modals.closeAll();
@@ -135,6 +138,7 @@ const AvailableTimezone = () => {
           Cancel
         </Button>
         <Button
+          data-testid="available-timezone-apply"
           loading={fetchTimezone.isLoading}
           onClick={() => {
             if (shortLabel.length >= 20) {
