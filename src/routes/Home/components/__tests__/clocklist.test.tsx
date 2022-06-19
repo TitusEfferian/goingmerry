@@ -89,6 +89,16 @@ describe("Clock List Unit Test", () => {
         timeout: 10000,
       }
     );
+    // try to delete
+    fireEvent.click(screen.getByTestId("clock-card-trash-asia/tokyo"));
+    await waitFor(
+      () => {
+        expect(screen.getByTestId("input-clock-card")).toBeDefined();
+      },
+      {
+        timeout: 10000,
+      }
+    );
   });
 
   it("should render clock max with 4 list correctly", async () => {

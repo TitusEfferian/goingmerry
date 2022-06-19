@@ -40,6 +40,7 @@ const CustomClockCard = () => {
   };
   return (
     <Card
+      data-testid="input-clock-card"
       shadow={"md"}
       ref={ref}
       onClick={handleOpenModal}
