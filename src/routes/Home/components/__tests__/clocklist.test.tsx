@@ -1,10 +1,5 @@
 import { ModalsProvider } from "@mantine/modals";
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { wait } from "@testing-library/user-event/dist/utils";
 import { useEffect } from "react";
 import { SWRConfig } from "swr";
@@ -192,18 +187,20 @@ describe("Clock List Unit Test", () => {
     );
   });
 
-  it('should render empty clock list correctly', async () => {
+  it("should render empty clock list correctly", async () => {
     render(
-        <ModalsProvider>
-          <HomeProvider>
-            <CustomClockList />
-          </HomeProvider>
-        </ModalsProvider>
-    )
-    await waitFor(()=>{
-        expect(screen.getByText('add up to 4 of your additional timezone here')).toBeDefined();
-    })
-    fireEvent.mouseEnter(screen.getByTestId('input-clock-card'));
-    fireEvent.click(screen.getByTestId('input-clock-card'));
-  })
+      <ModalsProvider>
+        <HomeProvider>
+          <CustomClockList />
+        </HomeProvider>
+      </ModalsProvider>
+    );
+    await waitFor(() => {
+      expect(
+        screen.getByText("add up to 4 of your additional timezone here")
+      ).toBeDefined();
+    });
+    fireEvent.mouseEnter(screen.getByTestId("input-clock-card"));
+    fireEvent.click(screen.getByTestId("input-clock-card"));
+  });
 });
