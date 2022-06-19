@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Going Merry Clock
 
 ## production build:
 https://goingmerry-clock.web.app/
