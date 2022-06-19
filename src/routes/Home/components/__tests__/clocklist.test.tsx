@@ -86,7 +86,7 @@ describe("Clock List Unit Test", () => {
         expect(screen.getByTestId("clock-card-tokyo")).toBeDefined();
       },
       {
-        timeout: 5000,
+        timeout: 10000,
       }
     );
   });
@@ -170,7 +170,7 @@ describe("Clock List Unit Test", () => {
         expect(screen.getByTestId("clock-card-jst")).toBeDefined();
       },
       {
-        timeout: 5000,
+        timeout: 10000,
       }
     );
     await waitFor(
@@ -178,7 +178,7 @@ describe("Clock List Unit Test", () => {
         expect(screen.getByTestId("clock-card-cest")).toBeDefined();
       },
       {
-        timeout: 5000,
+        timeout: 10000,
       }
     );
     await waitFor(
@@ -186,7 +186,7 @@ describe("Clock List Unit Test", () => {
         expect(screen.getByTestId("clock-card-+08")).toBeDefined();
       },
       {
-        timeout: 5000,
+        timeout: 10000,
       }
     );
     await waitFor(
@@ -194,7 +194,7 @@ describe("Clock List Unit Test", () => {
         expect(screen.getByTestId("clock-card-aest")).toBeDefined();
       },
       {
-        timeout: 5000,
+        timeout: 10000,
       }
     );
     await waitFor(
@@ -202,7 +202,7 @@ describe("Clock List Unit Test", () => {
         expect(screen.getByText("Same with bali")).toBeDefined();
       },
       {
-        timeout: 5000,
+        timeout: 10000,
       }
     );
   });
