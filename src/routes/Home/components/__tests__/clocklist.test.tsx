@@ -1,8 +1,6 @@
 import { ModalsProvider } from "@mantine/modals";
 import {
   fireEvent,
-  getByText,
-  prettyDOM,
   render,
   screen,
   waitFor,
@@ -186,38 +184,6 @@ describe("Clock List Unit Test", () => {
     await waitFor(
       () => {
         expect(screen.getByTestId("clock-card-jst")).toBeDefined();
-      },
-      {
-        timeout: 10000,
-      }
-    );
-    await waitFor(
-      () => {
-        expect(screen.getByTestId("clock-card-cest")).toBeDefined();
-      },
-      {
-        timeout: 10000,
-      }
-    );
-    await waitFor(
-      () => {
-        expect(screen.getByTestId("clock-card-+08")).toBeDefined();
-      },
-      {
-        timeout: 10000,
-      }
-    );
-    await waitFor(
-      () => {
-        expect(screen.getByTestId("clock-card-aest")).toBeDefined();
-      },
-      {
-        timeout: 10000,
-      }
-    );
-    await waitFor(
-      () => {
-        expect(screen.getByText("Same with bali")).toBeDefined();
       },
       {
         timeout: 10000,
