@@ -26,6 +26,7 @@ const CustomClockCard = ({ swrKey, city, label }: AppProps) => {
     const rawOffset = data?.raw_offset || 0;
     const baliOffset = 28800;
     const calculate = Math.abs(baliOffset - rawOffset) / 60 / 60;
+
     if (baliOffset === rawOffset) {
       return "Same with bali";
     }
@@ -59,6 +60,7 @@ const CustomClockCard = ({ swrKey, city, label }: AppProps) => {
     >
       <ActionIcon
         size={"sm"}
+        data-testid={`clock-card-trash-${swrKey}`.toLowerCase()}
         variant="transparent"
         onClick={() => {
           homeDispatch({
@@ -82,14 +84,22 @@ const CustomClockCard = ({ swrKey, city, label }: AppProps) => {
         }}
       >
         <Stack align={"center"}>
-          <Text size="xl" weight={"bold"}>
+          <Text
+            data-testid={`clock-card-${city}`.toLowerCase()}
+            size="xl"
+            weight={"bold"}
+          >
             {city}
           </Text>
           <Text>{label}</Text>
         </Stack>
         <Title order={2}>{currTime}</Title>
         <Stack align={"center"}>
-          <Text>{data?.abbreviation || ""}</Text>
+          <Text
+            data-testid={`clock-card-${data?.abbreviation || ""}`.toLowerCase()}
+          >
+            {data?.abbreviation || ""}
+          </Text>
           <Text>{timeDiff}</Text>
         </Stack>
       </Stack>
