@@ -30,9 +30,9 @@ const CustomClockCard = ({ swrKey, city, label }: AppProps) => {
       return "Same with bali";
     }
     if (baliOffset > rawOffset) {
-      return `${calculate} hour${calculate > 1 ? 's' : ''} behind bali`;
+      return `${calculate} hour${calculate > 1 ? "s" : ""} behind bali`;
     }
-    return `${calculate} hour${calculate > 1 ? 's' : ''} ahead bali`;
+    return `${calculate} hour${calculate > 1 ? "s" : ""} ahead bali`;
   }, [data]);
 
   // listen to single listener to broadcast all the minutes changes.
@@ -81,7 +81,7 @@ const CustomClockCard = ({ swrKey, city, label }: AppProps) => {
           height: "100%",
         }}
       >
-        <Stack>
+        <Stack align={"center"}>
           <Text size="xl" weight={"bold"}>
             {city}
           </Text>

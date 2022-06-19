@@ -53,6 +53,7 @@ const AvailableTimezone = () => {
     isError: false,
     message: "",
   });
+
   const [fetchTimezone, setFetchTimezone] = useState({
     shouldFetch: false,
     isLoading: false,
@@ -116,6 +117,11 @@ const AvailableTimezone = () => {
         onChange={(e) => {
           setShortLabel(e.target.value);
         }}
+        error={
+          shortLabel.length >= 20
+            ? "Label can only contains up to 20 letters."
+            : null
+        }
         placeholder="Label..."
         label="Short Label"
       />
@@ -131,6 +137,9 @@ const AvailableTimezone = () => {
         <Button
           loading={fetchTimezone.isLoading}
           onClick={() => {
+            if (shortLabel.length >= 20) {
+              return;
+            }
             if (!timezone) {
               setErrorSelect({
                 isError: true,
