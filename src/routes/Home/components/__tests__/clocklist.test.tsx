@@ -1,5 +1,12 @@
 import { ModalsProvider } from "@mantine/modals";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  fireEvent,
+  getByText,
+  prettyDOM,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { useEffect } from "react";
 import { SWRConfig } from "swr";
 import { HomeProvider, useHomeDispatch } from "../../contexts";
@@ -89,6 +96,7 @@ describe("Clock List Unit Test", () => {
         timeout: 10000,
       }
     );
+
     // try to delete
     fireEvent.click(screen.getByTestId("clock-card-trash-asia/tokyo"));
     await waitFor(

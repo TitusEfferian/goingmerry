@@ -91,6 +91,10 @@ const HomeProvider = ({ children }: AppProps) => {
    * init current time
    */
   useEffect(() => {
+    if (process.env.NODE_ENV === "test") {
+      handleFuncInterval();
+      return;
+    }
     const idInterval = setInterval(handleFuncInterval, 1000);
     return () => {
       clearInterval(idInterval);
