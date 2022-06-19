@@ -1,5 +1,5 @@
 import { ActionIcon, Card, Stack, Text, Title } from "@mantine/core";
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import { Trash } from "tabler-icons-react";
 import { world_timezone_api } from "../../../swr_types/timezone";
@@ -18,6 +18,22 @@ const CustomClockCard = ({ swrKey, city, label }: AppProps) => {
   const { currentLocationTime } = useHomeState();
   const [currTime, setCurrTime] = useState("");
   const homeDispatch = useHomeDispatch();
+
+  const timeDiff = useMemo(() => {
+    if (typeof data === "undefined") {
+      return "loading";
+    }
+    const rawOffset = data?.raw_offset || 0;
+    const baliOffset = 28800;
+    const calculate = Math.abs(baliOffset - rawOffset) / 60 / 60;
+    if (baliOffset === rawOffset) {
+      return "Same with bali";
+    }
+    if (baliOffset > rawOffset) {
+      return `${calculate} hour${calculate > 1 ? 's' : ''} behind bali`;
+    }
+    return `${calculate} hour${calculate > 1 ? 's' : ''} ahead bali`;
+  }, [data]);
 
   // listen to single listener to broadcast all the minutes changes.
   useEffect(() => {
@@ -74,7 +90,7 @@ const CustomClockCard = ({ swrKey, city, label }: AppProps) => {
         <Title order={2}>{currTime}</Title>
         <Stack align={"center"}>
           <Text>{data?.abbreviation || ""}</Text>
-          <Text>3 hours ahead</Text>
+          <Text>{timeDiff}</Text>
         </Stack>
       </Stack>
     </Card>
