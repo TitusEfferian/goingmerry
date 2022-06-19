@@ -2,6 +2,9 @@
   "name": "goingmerry",
   "version": "0.1.0",
   "private": true,
+  "jest": {
+    "coverageReporters": ["clover", "json", "lcov", "text","html-spa"]
+  },
   "dependencies": {
     "@mantine/core": "^4.2.9",
     "@mantine/hooks": "^4.2.9",

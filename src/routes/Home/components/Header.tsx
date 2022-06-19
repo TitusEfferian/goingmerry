@@ -18,14 +18,18 @@ const MantinHeader = () => {
           height: "100%",
         }}
       >
-        <Text>Going Merry Clock</Text>
+        <Text data-testid="header-title">Going Merry Clock</Text>
         <ActionIcon
           onClick={() => {
             toggleColorScheme();
           }}
           variant="transparent"
         >
-          {colorScheme === "dark" ? <Sun size={18} /> : <MoonStars size={18} />}
+          {colorScheme === "dark" ? (
+            <Sun data-testid="header-sun" size={18} />
+          ) : (
+            <MoonStars data-testid="header-moon" size={18} />
+          )}
         </ActionIcon>
       </Group>
     </Header>
